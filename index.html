@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Marine Wildlife — สารานุกรมสัตว์ทะเล</title>
+  <style>
+    :root{
+      --bg:#000000;
+      --text:#e8f0f8;
+      --muted:#a8b3bf;
+      --accent: #00c2ff;
+      --card-gap: 48px;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans Thai", "Sarabun", Arial, sans-serif;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;background:var(--bg);color:var(--text)}
+    .wrap{max-width:1100px;margin:40px auto;padding:20px}
+
+    header{display:flex;align-items:center;gap:18px;margin-bottom:24px}
+    header h1{font-size:28px;margin:0}
+    header p{margin:0;color:var(--muted)}
+
+    .list{display:flex;flex-direction:column;gap:var(--card-gap)}
+
+    .card{
+      display:flex;align-items:center;gap:28px;min-height:220px;opacity:0;transform:translateY(18px) scale(.995);transition:opacity .8s cubic-bezier(.2,.9,.2,1),transform .8s cubic-bezier(.2,.9,.2,1);
+      border-radius:12px;padding:18px;
+    }
+    .card.in-view{opacity:1;transform:none}
+
+    /* left image column */
+    .img{
+      flex:0 0 360px;max-width:360px;height:220px;border-radius:10px;overflow:hidden;position:relative;
+      background-size:cover;background-position:center center;transform-origin:center;transition:transform .25s ease,box-shadow .25s ease,filter .25s ease;
+      box-shadow: 0 6px 18px rgba(0,0,0,.6);
+    }
+    .img::after{
+      /* spotlight follows mouse (set --mx/--my with JS) */
+      content:"";position:absolute;inset:0;pointer-events:none;mix-blend-mode:screen;
+      background: radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(255,255,255,0.14), transparent 30%);
+      transition:background .12s linear;
+    }
+    .img:hover{transform:scale(1.03);filter:brightness(1.03)}
+
+    /* glow on hover */
+    .img:hover{box-shadow: 0 10px 40px rgba(0,0,0,.6), 0 0 30px rgba(0,194,255,0.12), 0 0 80px rgba(0,194,255,0.06)}
+
+    .content{flex:1;padding:8px 4px}
+    .name{font-size:20px;margin:0 0 6px 0}
+    .latin{font-size:13px;color:var(--muted);margin:0 0 12px 0}
+    .desc{color:#dbe9ff;line-height:1.6;margin:0}
+
+    /* responsive: stack on narrow screens */
+    @media (max-width:880px){
+      .card{flex-direction:column}
+      .img{width:100%;max-width:none;height:260px}
+    }
+
+    /* small helper */
+    .meta{margin-top:10px;color:var(--muted);font-size:13px}
+
+    /* subtle divider */
+    .sep{height:1px;background:linear-gradient(90deg,transparent, rgba(255,255,255,0.04),transparent);margin:18px 0;border-radius:2px}
+
+    /* keyboard focus */
+    .card:focus-within .img{outline:3px solid rgba(0,194,255,0.06)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>สัตว์ทะเล (Marine Wildlife)</h1>
+      <p>เลื่อนลงเพื่อดูข้อมูล — ภาพจะค่อยๆโผล่ขึ้นมา และมีแสงเมื่อชี้เมาส์</p>
+    </header>
+
+    <div class="list" id="list">
+
+      <!-- ====== ตัวอย่างการ์ด 1 ====== -->
+      <article class="card">
+        <div class="img" style="background-image:url('images/giant-turtle.jpg')" data-src="images/giant-turtle.jpg" role="img" aria-label="เต่าทะเล (Green sea turtle)"></div>
+        <div class="content">
+          <h2 class="name">เต่าทะเล</h2>
+          <div class="latin">Cheloniidae (Green sea turtle)</div>
+          <p class="desc">เต่าทะเลเป็นสัตว์เลื้อยคลานทะเลที่มีบทบาทสำคัญในการรักษาสมดุลระบบนิเวศ เช่น ควบคุมประชากรสาหร่ายและเป็นตัวแพร่เมล็ดพืชทะเล เต่าทะเลต้องอพยพข้ามมหาสมุทรหลายพันกิโลเมตรและมีสัญชาตญาณกลับไปวางไข่ยังชายหาดบ้านเกิด พวกมันได้รับผลกระทบอย่างมากจากไมโครพลาสติก แสงไฟชายหาด และการติดอวนประมง</p>
+          <div class="meta">ขนาด: ใหญ่ — ถิ่นที่อยู่: แนวปะการัง, ชายฝั่ง</div>
+        </div>
+      </article>
+
+      <!-- ====== ตัวอย่างการ์ด 2 ====== -->
+      <article class="card">
+        <div class="img" style="background-image:url('images/dolphin.jpg')" data-src="images/dolphin.jpg" role="img" aria-label="ปลาโลมา (Dolphin)"></div>
+        <div class="content">
+          <h2 class="name">ปลาโลมา</h2>
+          <div class="latin">Delphinidae</div>
+          <p class="desc">ปลาโลมาเป็นสัตว์เลี้ยงลูกด้วยนมที่ใช้เสียงสะท้อน (echolocation) ในการระบุตำแหน่งเหยื่อและนำทาง พวกมันมีโครงสร้างสังคมซับซ้อน สามารถเรียนรู้ ถ่ายทอดพฤติกรรม และสื่อสารด้วยภาษาที่มีรูปแบบเฉพาะ พบได้ตั้งแต่น่านน้ำชายฝั่งถึงทะเลเปิด และไวต่อมลพิษทางเสียงเป็นอย่างมาก</p>
+          <div class="meta">สังคม: อยู่รวมกันเป็นกลุ่ม — พฤติกรรม: โชว์ตัว บินน้ำ</div>
+        </div>
+      </article>
+
+      <!-- ====== ตัวอย่างการ์ด 3 ====== -->
+      <article class="card">
+        <div class="img" style="background-image:url('images/clownfish.jpg')" data-src="images/clownfish.jpg" role="img" aria-label="ปลาการ์ตูน (Clownfish)"></div>
+        <div class="content">
+          <h2 class="name">ปลาการ์ตูน</h2>
+          <div class="latin">Amphiprioninae</div>
+          <p class="desc">ปลาการ์ตูนมีระบบสังคมแบบลำดับชั้น โดยตัวเมียมีอำนาจสูงสุด และสามารถเปลี่ยนเพศได้เมื่อจำเป็น พวกมันอาศัยร่วมกับดอกไม้ทะเลโดยได้รับการปกป้องจากเข็มพิษ ขณะที่ปลาการ์ตูนช่วยทำความสะอาดและกระตุ้นการไหลเวียนน้ำให้ดอกไม้ทะเลเจริญเติบโต ความสัมพันธ์นี้เป็นตัวอย่างสำคัญของ mutualism ในทะเล</p>
+          <div class="meta">ขนาด: เล็ก — ถิ่นที่อยู่: แนวปะการัง</div>
+        </div>
+      </article>
+
+      <!-- ====== ตัวอย่างการ์ด 4 ====== -->
+      <article class="card">
+        <div class="img" style="background-image:url('images/giant-squid.jpg')" data-src="images/giant-squid.jpg" role="img" aria-label="หมึกยักษ์ (Giant squid)"></div>
+        <div class="content">
+          <h2 class="name">หมึกยักษ์</h2>
+          <div class="latin">Architeuthis</div>
+          <p class="desc">หมึกยักษ์เป็นหนึ่งในสัตว์ทะเลลึกที่ยังศึกษาไม่มาก พวกมันมีดวงตาที่ซับซ้อนและระบบประสาทที่พัฒนาอย่างมาก สามารถเรืองแสงในบางสภาวะและมีพฤติกรรมล่าที่รวดเร็ว ข้อมูลส่วนใหญ่ได้จากซากและการบันทึกภาพหายากจากกล้องสำรวจน้ำลึก ทำให้หมึกยักษ์กลายเป็นหนึ่งในสัตว์ลึกลับที่สุดในมหาสมุทร</p>
+          <div class="meta">ถิ่นที่อยู่: ทะเลลึก — ขนาด: ใหญ่</div>
+        </div>
+      </article>
+
+      <!-- ====== ตัวอย่างการ์ด 5 ====== -->
+      <article class="card">
+        <div class="img" style="background-image:url('images/shark.jpg')" data-src="images/shark.jpg" role="img" aria-label="ฉลาม (Shark)"></div>
+        <div class="content">
+          <h2 class="name">ฉลาม</h2>
+          <div class="latin">Selachimorpha</div>
+          <p class="desc">ฉลามมีประสาทรับความรู้สึกพิเศษ เช่น ampullae of Lorenzini ซึ่งสามารถตรวจจับสนามแม่เหล็กและคลื่นไฟฟ้าจากเหยื่อได้อย่างแม่นยำ พวกมันเป็นผู้ควบคุมโครงสร้างประชากรปลาชั้นล่าง ช่วยป้องกันไม่ให้ระบบนิเวศเสียสมดุล หลายชนิดต้องใช้เวลาหลายปีกว่าจะโตเต็มวัย ทำให้เสี่ยงต่อการลดจำนวนจากการประมงเกินกำลัง</p>
+          <div class="meta">บทบาท: ผู้ล่า — การคุกคาม: ประมงเกินกำลัง</div>
+        </div>
+      </article>
+
+      <!-- ====== เพิ่มอีก 20 ชนิด ====== -->
+
+      <article class="card">
+        <div class="img" style="background-image:url('images/manta-ray.jpg')" data-src="images/manta-ray.jpg"></div>
+        <div class="content">
+          <h2 class="name">กระเบนราหู</h2>
+          <div class="latin">Mobula birostris</div>
+          <p class="desc">กระเบนราหูมีโครงสร้างปีกที่สามารถสร้างแรงยกในน้ำได้อย่างมีประสิทธิภาพ ทำให้ใช้พลังงานน้อยแม้มีขนาดใหญ่ พวกมันมักรวมกลุ่มกันในจุดที่มีแพลงก์ตอนหนาแน่น และช่วยหมุนเวียนสารอาหารในคอลัมน์น้ำ นอกจากนี้ยังกระโดดขึ้นเหนือน้ำซึ่งเชื่อว่าเป็นการสื่อสารหรือกำจัดปรสิตบนผิวหนัง</p>
+          <div class="meta">ลักษณะเด่น: ปีกกว้างมาก — ถิ่นที่อยู่: น้ำอุ่นทั่วโลก</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="img" style="background-image:url('images/blue-whale.jpg')" data-src="images/blue-whale.jpg"></div>
+        <div class="content">
+          <h2 class="name">ปลาวาฬสีน้ำเงิน</h2>
+          <div class="latin">Balaenoptera musculus</div>
+          <p class="desc">ระบบไหลเวียนเลือดและหัวใจของปลาวาฬสีน้ำเงินมีขนาดมหึมา ช่วยรักษาอุณหภูมิในน้ำเย็นลึกได้ดี การกินเคยจำนวนมากช่วยควบคุมประชากรแพลงก์ตอนสัตว์ พร้อมกระจายธาตุอาหารกลับสู่ผิวน้ำผ่านการขับถ่าย ซึ่งเป็นกระบวนการสำคัญต่อระบบนิเวศมหาสมุทร</p>
+          <div class="meta">ขนาด: ใหญ่ที่สุดในโลก — ถิ่นที่อยู่: มหาสมุทรลึก</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="img" style="background-image:url('images/orca.jpg')" data-src="images/orca.jpg"></div>
+        <div class="content">
+          <h2 class="name">วาฬเพชฌฆาต</h2>
+          <div class="latin">Orcinus orca</div>
+          <p class="desc">วาฬเพชฌฆาตมีวัฒนธรรมการล่าที่ถ่ายทอดกันในฝูง เช่น เทคนิคตีคลื่นเพื่อให้แมวน้ำหลุดจากก้อนน้ำแข็ง พวกมันมีภาษาส่งเสียงเฉพาะฝูงและอาจพัฒนาแตกต่างกันในแต่ละภูมิภาค ถือเป็นผู้ควบคุมประชากรสัตว์ทะเลขนาดใหญ่ให้สมดุลอย่างยิ่ง</p>
+          <div class="meta">อาหาร: แมวน้ำ, ปลา, ฉลาม — พฤติกรรม: ล่าสม่ำเสมอเป็นฝูง</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="img" style="background-image:url('images/seahorse.jpg')" data-src="images/seahorse.jpg"></div>
+        <div class="content">
+          <h2 class="name">ม้าน้ำ</h2>
+          <div class="latin">Hippocampus</div>
+          <p class="desc">ม้าน้ำมีลำตัวเป็นเกล็ดแข็งไม่มีเกล็ดแบบปลาอื่น การว่ายน้ำช้าและตั้งตรงทำให้ต้องอาศัยพืชทะเลเพื่อพรางตัว พวกมันยังเป็นตัวบ่งชี้คุณภาพน้ำเพราะไวต่อมลพิษและการทำลายถิ่นที่อยู่ เช่น การลดลงของหญ้าทะเล</p>
+          <div class="meta">อาหาร: กุ้งฝอย — ถิ่นที่อยู่: หญ้าทะเล</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="img" style="background-image:url('images/octopus.jpg')" data-src="images/octopus.jpg"></div>
+        <div class="content">
+          <h2 class="name">ปลาหมึกแปดแขน</h2>
+          <div class="latin">Octopoda</div>
+          <p class="desc">แขนแต่ละเส้นของปลาหมึกแปดแขนมีระบบประสาทควบคุมอิสระ สามารถตัดสินใจเบื้องต้นได้เอง ทำให้เคลื่อนไหวและสำรวจได้อย่างแม่นยำ พวกมันสามารถเปิดขวด สังเกตแบบจำลอง และหนีจากกรงได้ ถือว่าเป็นสัตว์ไม่มีกระดูกสันหลังที่ฉลาดที่สุดในโลก</p>
+          <div class="meta">ความสามารถ: พรางตัวขั้นสูง — สมอง: ฉลาดมาก</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="img" style="background-image:url('images/jellyfish.jpg')" data-src="images/jellyfish.jpg"></div>
+        <div class="content">
+          <h2 class="name">แมงกะพรุน</h2>
+          <div class="latin">Scyphozoa</div>
+          <p class="desc">แมงกะพรุนบางชนิดเป็นตัวบ่งชี้สภาพภูมิอากาศโลก เนื่องจากประชากรสามารถเพิ่มขึ้นเมื่ออุณหภูมิน้ำสูงขึ้นหรือปลาผู้ล่าลดจำนวนลง วงจรชีวิตมีทั้งระยะที่เคลื่อนที่และระยะโพลิปที่เกาะพื้นแข็ง ทำให้ปรับตัวกับสภาพแวดล้อมได้หลายแบบ</p>
+          <div class="meta">อายุ: บางชนิดเป็นอมตะ — อันตราย: พิษต่อมนุษย์</div>
+        </div>
+      </article>
+
+      <!-- ... (เพิ่มอีก 14 ชนิดในรูปแบบเดียวกัน) ... -->
+
+      <article class="card">
+        <div class="img" style="background-image:url('images/lobster.jpg')" data-src="images/lobster.jpg"></div>
+        <div class="content">
+          <h2 class="name">กุ้งลอบสเตอร์</h2>
+          <div class="latin">Nephropidae</div>
+          <p class="desc">ลอบสเตอร์มีระบบไหลเวียนเลือดที่ใช้ฮีโมไซยานินเป็นตัวพาออกซิเจนทำให้เลือดเป็นสีน้ำเงิน พวกมันมีพฤติกรรมป้องกันอาณาเขตอย่างชัดเจน และต้องลอกคราบจึงจะเติบโต ซึ่งช่วงนี้จะอ่อนแอต่อผู้ล่าอย่างมาก</p>
+          <div class="meta">อาหาร: หอย/ปลา — ถิ่นที่อยู่: พื้นทรายลึก</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="img" style="background-image:url('images/sea-urchin.jpg')" data-src="images/sea-urchin.jpg"></div>
+        <div class="content">
+          <h2 class="name">เม่นทะเล</h2>
+          <div class="latin">Echinoidea</div>
+          <p class="desc">เม่นทะเลมีอวัยวะเคี้ยวอาหารที่เรียกว่า “Lantern of Aristotle” ใช้บดสาหร่ายและตะไคร่น้ำบนหิน นักชีววิทยานำประชากรเม่นทะเลไปศึกษาการเปลี่ยนแปลงของแนวปะการัง เนื่องจากประชากรที่มากเกินไปสามารถทำให้แนวปะการังพังทลายได้</p>
+          <div class="meta">ระบบนิเวศ: ควบคุมสาหร่าย — อันตราย: เข็มพิษ</div>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="img" style="background-image:url('images/sea-cucumber.jpg')" data-src="images/sea-cucumber.jpg"></div>
+        <div class="content">
+          <h2 class="name">ปลิงทะเล</h2>
+          <div class="latin">Holothuroidea</div>
+          <p class="desc">ปลิงทะเลสามารถขับอวัยวะภายในออกเพื่อป้องกันตัว และสร้างใหม่ภายหลังได้ ทำให้เป็นสัตว์ที่มีพลังฟื้นฟูสูงมาก การกินตะกอนพื้นทะเลช่วยเพิ่มออกซิเจนในดินและฟื้นฟูระบบนิเวศโดยรวม</p>
+          <div class="meta">ประโยชน์: ฟื้นฟูพื้นทราย — ถิ่นที่อยู่: พื้นทรายตื้น/ลึก</div>
+        </div>
+      </article>
+
+      <!-- ====== จบเพิ่มใหม่ ====== -->
+
+      <div class="sep""></div>
+
+      <!-- ====== tip/footer ====== -->
+      <div style="color:var(--muted);font-size:13px;padding:6px 4px">Tip: เปลี่ยนภาพโดยการวางไฟล์ภาพไว้ในโฟลเดอร์ <code>images/</code> แล้วตั้งชื่อให้ตรงกับ <code>data-src</code> ในแต่ละ .img หรือแก้ style="background-image:url('...')" เป็น URL จริงจากเซิร์ฟเวอร์ของคุณ</div>
+
+    </div>
+  </div>
+
+  <script>
+    // ---------- Fade-in on scroll (IntersectionObserver) ----------
+    const cards = document.querySelectorAll('.card');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('in-view');
+          // optional: lazy-load background images from data-src (if you want)
+          const img = entry.target.querySelector('.img');
+          const src = img.getAttribute('data-src');
+          if(src && img.style.backgroundImage.indexOf(src)===-1){
+            img.style.backgroundImage = `url('${src}')`;
+          }
+          // once in view, unobserve to save resources
+          io.unobserve(entry.target);
+        }
+      });
+    },{threshold:0.12});
+    cards.forEach(c=>io.observe(c));
+
+    // ---------- Spotlight follow mouse on each image ----------
+    function attachSpotlight(imgEl){
+      imgEl.addEventListener('mousemove', (e)=>{
+        const rect = imgEl.getBoundingClientRect();
+        const x = e.clientX - rect.left; // x within element
+        const y = e.clientY - rect.top;  // y within element
+        imgEl.style.setProperty('--mx', x + 'px');
+        imgEl.style.setProperty('--my', y + 'px');
+      });
+      imgEl.addEventListener('mouseleave', ()=>{
+        // move spotlight to center slowly
+        imgEl.style.setProperty('--mx','50%');
+        imgEl.style.setProperty('--my','50%');
+      });
+    }
+    document.querySelectorAll('.img').forEach(attachSpotlight);
+
+    // ---------- Keyboard accessibility: focus reveals card ----------
+    document.querySelectorAll('.card').forEach(c=>{
+      c.tabIndex = -1; // keep cards focusable programmatically
+    });
+
+    // If you want to dynamically add more cards, duplicate the article.card HTML structure.
+  </script>
+</body>
+</html>
